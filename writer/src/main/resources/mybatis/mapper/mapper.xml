@@ -1,0 +1,34 @@
+<?xml	version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		 
+<!--  SQL 끝에 세미콜론 넣지말것 (이거 때문에 계속찾았었다 중요하다 정신차려야한다) -->		 
+<mapper	namespace="com.dgrm.test.mapper.IWriterMapper" >
+		<select id="list" resultType="com.dgrm.test.dto.WriterDTO">
+				select * from king.writer order by writer_idx desc
+		</select>
+		
+		<insert id="write">
+			INSERT INTO king.WRITER(writer_idx, writer_name, writer_title, writer_content, writer_date)
+			 VALUES (king.writer_seq.NEXTVAL, #{param1} , #{param2} , #{param3}, sysdate)
+		</insert>
+		
+		<select id="view" resultType="com.dgrm.test.dto.WriterDTO">
+			select * from king.writer where writer_idx=#{param1}
+		</select>
+		
+		<delete id="delete">
+			DELETE from king.WRITER WHERE writer_idx = #{param1}
+		</delete>
+		
+		<update id="update">
+			update king.writer set
+					writer_name = #{param2},
+					writer_title = #{param3},
+					writer_content = #{param4}
+					where writer_idx = #{param1}
+		</update>
+</mapper>
+
